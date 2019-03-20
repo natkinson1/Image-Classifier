@@ -141,7 +141,7 @@ def save_checkpoint(model, train_data, hidden_layers=[10000,1500], check_name="c
 def load_model(path):
     """Loads the model you previously built from a checkpoint. Returns the model"""
     model = build_model()
-    checkpoint = torch.load(path)
+    checkpoint = torch.load(path, map_location="cpu")
     model.class_to_idx = checkpoint['class_to_idx']
     model.load_state_dict(checkpoint['state_dict'])
     
