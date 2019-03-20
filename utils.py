@@ -143,7 +143,7 @@ def load_model(path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = build_model()
     model.to(device)
-    checkpoint = torch.load(path)
+    checkpoint = torch.load(path, map_location='cpu')
     model.class_to_idx = checkpoint['class_to_idx']
     model.load_state_dict(checkpoint['state_dict'])
     
