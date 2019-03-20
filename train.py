@@ -13,7 +13,8 @@ def get_parsed_arguments():
     
     parser = argparse.ArgumentParser(description="Training our model")
     #Required
-    parser.add_argument("data_dir", help="Directory of images", default="./flowers/")
+    parser.add_argument("data_dir", help="Directory of images")
+    parser.add_argument("pin_mem", help="Windows:True, Linux:False, type=bool)
     #Optional
     parser.add_argument("-e", "--epoch", dest="epoch",help="Number of epochs to train the data.", default=10, type=int)
     parser.add_argument("-a","--arch", type=str, dest="arch", help="Architecture of network", default="vgg19")
@@ -36,7 +37,7 @@ def main():
     args = get_parsed_arguments()
     
     #Loading the data
-    imagedatasets, dataloader = utils.load_data(path=args.data_dir)
+    imagedatasets, dataloader = utils.load_data(path=args.data_dir, pin_memory=args.pin_mem)
     
     #Build the model
     model = utils.build_model(arch=args.arch, dropout=args.dropout, con_check=args.con_check)
