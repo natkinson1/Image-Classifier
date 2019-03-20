@@ -190,7 +190,7 @@ def predict(image_path, model, topk=5):
     img.unsqueeze_(0)
     
     with torch.no_grad():
-        probs = torch.exp(model.forward(img.cuda()))
+        probs = torch.exp(model.forward(img))
         probs = probs.cpu()
     
     probs, classes = probs.topk(topk)
